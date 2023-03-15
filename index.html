@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>8 bit snow</title>
+	<style>
+		@import url('https://fonts.cdnfonts.com/css/8bit-wonder');
+
+		body {
+			background-color: black;
+			color: white;
+			font-family: '8bit wonder', sans-serif;
+			font-size: 72px;
+			text-align: center;
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			justify-content: center;
+			height: 100vh;
+			overflow: hidden;
+		}
+
+		#cursor {
+			display: inline-block;
+			animation: blink 1s infinite;
+		}
+
+		@keyframes blink {
+			0% {
+				opacity: 1;
+			}
+			50% {
+				opacity: 0;
+			}
+			100% {
+				opacity: 1;
+			}
+		}
+
+		.snow {
+			position: absolute;
+			width: 5px;
+			height: 5px;
+			background-color: white;
+			border-radius: 0%;
+			animation: snowfall 10s linear infinite;
+			will-change: transform;
+			left: calc(100vw * var(--x));
+			top: calc(100vh * var(--y));
+		}
+
+		@keyframes snowfall {
+			0% {
+				transform: translate(0, -100vh) rotate(0deg);
+			}
+			100% {
+				transform: translate(calc(100vw * var(--x)), calc(100vh * var(--y))) rotate(360deg);
+			}
+		}
+
+		@media (max-width: 768px) {
+			body {
+				font-size: 50px;
+			}
+		}
+
+		@media (max-width: 480px) {
+			body {
+				font-size: 30px;
+			}
+			.snow {
+				width: 3px;
+				height: 3px;
+			}
+		}
+		.footer {
+			position: absolute;
+			bottom: 20px;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			width: 100%;
+		}
+
+		.github-icon {
+			width: 30px;
+			height: 30px;
+			background-image: url('http://pixelartmaker-data-78746291193.nyc3.digitaloceanspaces.com/image/fd29c1acbb89477.png');
+			background-size: cover;
+			margin: 0 10px;
+			cursor: pointer;
+		}    
+	</style>
+</head>
+<body>
+	<div id="text">8 bit snow<span id="cursor">_</span></div>
+
+	<script>
+		for (let i = 0; i < 100; i++) {
+			let snowflake = document.createElement('div');
+			snowflake.classList.add('snow');
+			snowflake.style.setProperty('--x', Math.random());
+			snowflake.style.setProperty('--y', Math.random());
+			snowflake.style.setProperty('animation-duration', (Math.random() * 5 + 5) + 's');
+			document.body.appendChild(snowflake);
+		}
+	</script>
+	<div class="footer">
+		<a href="https://github.com/ehsonne/8bitsnow" target="_blank" class="github-icon"></a>   
+	</div>
+</body>
+</html>
